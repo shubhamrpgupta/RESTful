@@ -87,18 +87,18 @@ const availableTiming = [
     }
 ]
 
-
+const convertHoursIntoMinute = (timeInStr) => {
+    const hour = timeInStr.split(":")[0] * 60;
+    const minute = parseInt(timeInStr.split(":")[1]);
+    const wholeDayIntoMin = hour + minute;
+    return wholeDayIntoMin;
+}
 
 app.get("/doctor-availability", (req, res) => {
 
     const { date, time } = req.query;
 
-    const convertHoursIntoMinute = (timeInStr) => {
-        const hour = timeInStr.split(":")[0] * 60;
-        const minute = parseInt(timeInStr.split(":")[1]);
-        const wholeDayIntoMin = hour + minute;
-        return wholeDayIntoMin;
-    }
+
 
     const givenDay = new Date(date).toLocaleDateString(undefined, { weekday: "long" });
     const givenTime = convertHoursIntoMinute(time);
